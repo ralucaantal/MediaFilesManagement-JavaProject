@@ -26,14 +26,14 @@ public class Computer implements Serializable {
                 "C:\\Users\\Documents\\",
                 Arrays.asList(
                         new File(
-                                "screenshot1",
+                                "Buletin",
                                 "jpg",
                                 4.3,
                                 LocalDateTime.now()
                         ),
                         new File(
-                                "photo",
-                                "png",
+                                "AdeverintaStudent",
+                                "jpg",
                                 5.8,
                                 LocalDateTime.now()
                         ),
@@ -42,12 +42,18 @@ public class Computer implements Serializable {
                                 "mp3",
                                 10.5,
                                 LocalDateTime.now()
+                        ),
+                        new File(
+                                "photo",
+                                "png",
+                                12.8,
+                                LocalDateTime.now()
                         )
                 )
         );
 
         Director director2 = new Director(
-                "C:\\Users\\Documents\\Others",
+                "C:\\Users\\Photos\\Others",
                 Arrays.asList(
                         new File(
                                 "ss1",
@@ -108,8 +114,8 @@ public class Computer implements Serializable {
 
     @Override
     public String toString() {
-        return "Computer{" +
-                "directories=" + directories +
-                '}';
+        return "Computer: \n" +
+                "directories: " + directories +
+                '\n';
     }
 }

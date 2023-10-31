@@ -51,11 +51,11 @@ public class File implements Serializable {
 
     @Override
     public String toString() {
-        return "File{" +
-                "name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", dimension=" + dimension +
-                ", date=" + date +
-                '}';
+        return "File: " +
+                  name + '\n' +
+                "Type: " + type + '\n' +
+                "Dimension: " + dimension +'\n'+
+                "Date: " + date +
+                '\n';
     }
 }

@@ -17,9 +17,9 @@ public class Director implements Serializable {
 
     @Override
     public String toString() {
-        return "Director{" +
-                "path='" + path + '\'' +
-                ", files=" + files +
-                '}';
+        return "Director: " +'\n'+
+                "Path: " + path + +'\n' +
+                "Files: \n" + files +
+                '\n';
     }
 }

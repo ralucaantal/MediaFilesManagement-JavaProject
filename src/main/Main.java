@@ -7,8 +7,8 @@ public class Main {
 
         Computer computer = new Computer();
 
-       // computer.writeDirectories();
-        computer.readDirectories();
+       //computer.writeDirectories();
+       computer.readDirectories();
 
         for (int i = 0; i < computer.getDirectories().size(); i++)
             System.out.println(computer.getDirectories().get(i));
