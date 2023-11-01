@@ -9,6 +9,8 @@ import java.util.List;
 public class Computer implements Serializable {
     List<Director> directories=new ArrayList<>();
 
+    private static Computer computer=null;
+
     public Computer() {
     }
 
@@ -20,69 +22,69 @@ public class Computer implements Serializable {
         this.directories = directories;
     }
 
-    public void writeDirectories() throws Exception {
+    public void writeDirectories(List<Director> directoriesToWrite) throws Exception {
 
-        Director director1 = new Director(
-                "C:\\Users\\Documents\\",
-                Arrays.asList(
-                        new File(
-                                "Buletin",
-                                "jpg",
-                                4.3,
-                                LocalDateTime.now()
-                        ),
-                        new File(
-                                "AdeverintaStudent",
-                                "jpg",
-                                5.8,
-                                LocalDateTime.now()
-                        ),
-                        new File(
-                                "music",
-                                "mp3",
-                                10.5,
-                                LocalDateTime.now()
-                        ),
-                        new File(
-                                "photo",
-                                "png",
-                                12.8,
-                                LocalDateTime.now()
-                        )
-                )
-        );
-
-        Director director2 = new Director(
-                "C:\\Users\\Photos\\Others",
-                Arrays.asList(
-                        new File(
-                                "ss1",
-                                "jpg",
-                                8.7,
-                                LocalDateTime.now()
-                        ),
-                        new File(
-                                "Graduation",
-                                "png",
-                                9.6,
-                                LocalDateTime.now()
-                        ),
-                        new File(
-                                "Coldplay",
-                                "mp3",
-                                25.8,
-                                LocalDateTime.now()
-                        )
-                )
-        );
-
-        directories.add(director1);
-        directories.add(director2);
+//        Director director1 = new Director(
+//                "C:\\Users\\Documents\\",
+//                Arrays.asList(
+//                        new File(
+//                                "Buletin",
+//                                "jpg",
+//                                4.3,
+//                                LocalDateTime.now()
+//                        ),
+//                        new File(
+//                                "AdeverintaStudent",
+//                                "jpg",
+//                                5.8,
+//                                LocalDateTime.now()
+//                        ),
+//                        new File(
+//                                "music",
+//                                "mp3",
+//                                10.5,
+//                                LocalDateTime.now()
+//                        ),
+//                        new File(
+//                                "photo",
+//                                "png",
+//                                12.8,
+//                                LocalDateTime.now()
+//                        )
+//                )
+//        );
+//
+//        Director director2 = new Director(
+//                "C:\\Users\\Photos\\Others",
+//                Arrays.asList(
+//                        new File(
+//                                "ss1",
+//                                "jpg",
+//                                8.7,
+//                                LocalDateTime.now()
+//                        ),
+//                        new File(
+//                                "Graduation",
+//                                "png",
+//                                9.6,
+//                                LocalDateTime.now()
+//                        ),
+//                        new File(
+//                                "Coldplay",
+//                                "mp3",
+//                                25.8,
+//                                LocalDateTime.now()
+//                        )
+//                )
+//        );
+//
+//        directories.add(director1);
+//        directories.add(director2);
 
         try {
             FileOutputStream fileOutputStream = new FileOutputStream("computerData", false);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(directories);
+            objectOutputStream.writeObject(directoriesToWrite);
 
             objectOutputStream.close();
             fileOutputStream.close();
@@ -117,5 +119,12 @@ public class Computer implements Serializable {
         return "Computer: \n" +
                 "directories: " + directories +
                 '\n';
+    }
+
+    public static synchronized Computer getInstance()
+    {
+        if(computer==null)
+            computer=new Computer();
+        return computer;
     }
 }
