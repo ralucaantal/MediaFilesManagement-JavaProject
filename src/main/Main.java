@@ -1,6 +1,7 @@
 package main;
 
 import logic.Computer;
+import logic.Director;
 
 import java.util.Scanner;
 
@@ -19,10 +20,22 @@ public class Main {
         Scanner scanner=new Scanner(System.in);
         String response;
 
+        System.out.println("Welcome to the Media Files Management App!!");
+        System.out.println("---------------------------------------------");
+
+
+
         while(true)
         {
+
+            System.out.println("Type `continue` to view the directories on this computer or `exit` to close the app.");
+
             response= scanner.nextLine();
-            System.out.println(response);
+            if(response.equals("continue"))
+            {
+                for(Director d: computer.getDirectories())
+                    System.out.println(d.getPath());
+            }
 
             if(response.equals("exit"))
                 System.exit(0);

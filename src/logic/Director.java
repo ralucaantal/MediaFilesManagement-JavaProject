@@ -6,6 +6,9 @@ import java.util.List;
 
 public class Director implements Serializable {
 
+    private static final long serialVersionUID = 1876203141525452896L;
+
+
     private String path;
 
     List<File> files = new ArrayList<>();
@@ -13,6 +16,10 @@ public class Director implements Serializable {
     public Director(String path, List<File> files) {
         this.path = path;
         this.files = files;
+    }
+
+    public String getPath() {
+        return path;
     }
 
     @Override
