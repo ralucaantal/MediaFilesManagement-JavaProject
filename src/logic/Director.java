@@ -29,4 +29,16 @@ public class Director implements Serializable {
                 "Files: \n" + files +
                 '\n';
     }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public List<File> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<File> files) {
+        this.files = files;
+    }
 }

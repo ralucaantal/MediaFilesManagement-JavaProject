@@ -52,9 +52,9 @@ public class File implements Serializable {
     @Override
     public String toString() {
         return "File: " +
-                  name + '\n' +
-                "Type: " + type + '\n' +
-                "Dimension: " + dimension +'\n'+
+                  name + " | " +
+                "Type: " + type + " | " +
+                "Dimension: " + dimension +" | "+
                 "Date: " + date +
                 '\n';
     }
