@@ -4,6 +4,7 @@ import exceptions.MultimediaException;
 import logic.Computer;
 import logic.Director;
 import logic.File;
+import logic.Statistics;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
@@ -28,6 +29,8 @@ public class Main {
         String location = "Home";
         int directorNo = 0;
 
+        Statistics statistics = Statistics.getInstance();
+
 
         System.out.println("Welcome to the Media Files Management App!!");
         System.out.println("---------------------------------------------");
@@ -37,7 +40,7 @@ public class Main {
         while (true) {
             switch (location) {
                 case "Home":
-                    System.out.println("Type `continue` to view the directories on this computer or `exit` to close the app.");
+                    System.out.println("Type `continue` to view the directories on this computer or `exit` to close the app or `stats` for statistics.");
                     response = scanner.nextLine();
                     try {
                         if (response.equals("continue")) {
@@ -53,6 +56,8 @@ public class Main {
                             computer.writeDirectories(computer.getDirectories());
 
                             System.exit(0);
+                        } else if (response.equals("stats")) {
+                            statistics.ShowStatistics(computer);
                         } else {
                             throw new MultimediaException("Wrong answer! Try again.");
                         }
