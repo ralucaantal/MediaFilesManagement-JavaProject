@@ -19,10 +19,10 @@ public class File implements Serializable {
         this.date = date;
     }
 
-    public File(String name, String type, double dimension) {
+    public File(String name, String type) {
         this.name = name;
         this.type = type;
-        this.dimension = dimension;
+        this.dimension = Math.random();;
         this.date = LocalDateTime.now();
     }
 

@@ -43,6 +43,7 @@ public class Main {
                             for (int i = 0; i < computer.getDirectories().size(); i++) {
                                 System.out.println((i + 1) + ". " + computer.getDirectories().get(i).getPath());
                             }
+                            System.out.println("Or choose an action: add | rename | delete");
 
 
                             location = "Directories";
@@ -59,7 +60,7 @@ public class Main {
                     break;
                 case "Directories":
                     try {
-                        System.out.println("Or choose an action: add | rename | delete");
+
 
                         response = scanner.nextLine();
 
@@ -71,31 +72,68 @@ public class Main {
                             location = "Home";
                         }
                         // DE FACUT O PAGINA NOUA IN MENIU
-                        else if(response.equals("add"))
-                        {
+                        else if (response.equals("add")) {
                             System.out.println("Type the path of the new director: ");
 
                             response = scanner.nextLine();
 
-                            Director newDirector=new Director(response);
+                            Director newDirector = new Director(response);
 
                             computer.getDirectories().add(newDirector);
-                        }
+                            for (int i = 0; i < computer.getDirectories().size(); i++) {
+                                System.out.println((i + 1) + ". " + computer.getDirectories().get(i).getPath());
+                            }
+                            System.out.println("Or choose an action: add | rename | delete");
+                            location = "Directories";
+                        } else if (response.equals("rename")) {
+                            System.out.println("Type the index of the directory you want to rename: ");
 
-                       else  if (!computer.getDirectories().isEmpty()) {
+                            response = scanner.nextLine();
+                            if (Double.parseDouble(response) >= 1 && Double.parseDouble(response) <= computer.getDirectories().size()) {
+                                int resp = (int) Double.parseDouble(response) - 1;
+                                System.out.println("Type new name for the directory: ");
+                                response = scanner.nextLine();
+                                computer.getDirectories().get(resp).setPath(response);
+                            } else {
+                                throw new MultimediaException("Invalid index! Try again.");
+                            }
+                            for (int i = 0; i < computer.getDirectories().size(); i++) {
+                                System.out.println((i + 1) + ". " + computer.getDirectories().get(i).getPath());
+                            }
+                            System.out.println("Or choose an action: add | rename | delete");
+                            location = "Directories";
 
-                          if (Double.parseDouble(response) >= 1 && Double.parseDouble(response) <= computer.getDirectories().size()) {
+                        } else if (response.equals("delete")) {
+                            System.out.println("Type the index of the directory you want to delete: ");
+
+                            response = scanner.nextLine();
+                            if (Double.parseDouble(response) >= 1 && Double.parseDouble(response) <= computer.getDirectories().size()) {
+                                int resp = (int) Double.parseDouble(response) - 1;
+                                computer.getDirectories().remove(resp);
+                            } else {
+                                throw new MultimediaException("Invalid index! Try again.");
+                            }
+                            for (int i = 0; i < computer.getDirectories().size(); i++) {
+                                System.out.println((i + 1) + ". " + computer.getDirectories().get(i).getPath());
+                            }
+                            System.out.println("Or choose an action: add | rename | delete");
+                            location = "Directories";
+                        } else if (!computer.getDirectories().isEmpty()) {
+
+                            if (Double.parseDouble(response) >= 1 && Double.parseDouble(response) <= computer.getDirectories().size()) {
                                 int resp = (int) Double.parseDouble(response) - 1;
                                 directorNo = resp;
                                 System.out.println("-------------------------------------");
                                 System.out.println("In directory " + computer.getDirectories().get(resp).getPath() + " you have the following files: ");
 
+                                if (!computer.getDirectories().get(directorNo).getFiles().isEmpty()) {
+                                    for (int i = 0; i < computer.getDirectories().get(resp).getFiles().size(); i++) {
+                                        System.out.println(i + 1 + ". " + computer.getDirectories().get(resp).getFiles().get(i).getName());
+                                    }
+                                    System.out.println("-------------------------------------");
 
-                                for (int i = 0; i < computer.getDirectories().get(resp).getFiles().size(); i++) {
-                                    System.out.println(i + 1 + ". " + computer.getDirectories().get(resp).getFiles().get(i).getName());
                                 }
 
-                                System.out.println("-------------------------------------");
                                 location = "Files";
                             } else {
                                 throw new MultimediaException("Invalid index! Try again.");
@@ -111,7 +149,16 @@ public class Main {
                     break;
                 case "Files":
                     try {
-                        System.out.println("If you want details for a specific file, type the index of the file. Write `back` to go back. Write `exit` to close the app. ");
+                        if (computer.getDirectories().get(directorNo).getFiles().isEmpty()) {
+                            System.out.println("There are no files in this directory!");
+                            System.out.println("-------------------------------------");
+
+                            System.out.println("Choose an action: add | back | exit");
+
+                        } else {
+                            System.out.println("If you want details for a specific file, type the index of the file. Write `back` to go back. Write `exit` to close the app. ");
+                            System.out.println("Or choose an action: add | rename | delete");
+                        }
                         response = scanner.nextLine();
                         if (response.equals("exit")) {
                             computer.writeDirectories(computer.getDirectories());
@@ -121,7 +168,37 @@ public class Main {
                             for (int i = 0; i < computer.getDirectories().size(); i++) {
                                 System.out.println((i + 1) + ". " + computer.getDirectories().get(i).getPath());
                             }
+                            System.out.println("Or choose an action: add | rename | delete");
                             location = "Directories";
+                        } else if (response.equals("add")) {
+
+
+                            System.out.println("Type the name of the new file: ");
+
+                            String name = scanner.nextLine();
+
+                            System.out.println("Write the type of the new file: ");
+
+                            String type = scanner.nextLine();
+
+                            File newFile=new File(name, type);
+
+                            computer.getDirectories().get(directorNo).getFiles().add(newFile);
+
+                            if (!computer.getDirectories().get(directorNo).getFiles().isEmpty()) {
+                                System.out.println("-------------------------------------");
+
+                                for (int i = 0; i < computer.getDirectories().get(directorNo).getFiles().size(); i++) {
+                                    System.out.println(i + 1 + ". " + computer.getDirectories().get(directorNo).getFiles().get(i).getName());
+                                }
+                                System.out.println("-------------------------------------");
+
+                            }
+
+
+
+
+
                         } else if (Double.parseDouble(response) >= 1 && Double.parseDouble(response) <= computer.getDirectories().get(directorNo).getFiles().size()) {
                             System.out.println("Full details for your file: ");
                             int index = (int) (Double.parseDouble(response) - 1);
