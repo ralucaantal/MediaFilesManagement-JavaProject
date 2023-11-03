@@ -7,14 +7,12 @@ import java.util.List;
 
 public class Director implements Serializable {
 
-    private static final long serialVersionUID = 1876203141525452896L;
-
-
     private String path;
 
     List<File> files = new ArrayList<>();
 
 
+    private static final long serialVersionUID = 1876203141525452896L;
     public Director(String path, List<File> files) {
         this.path = path;
         this.files = files;

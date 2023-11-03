@@ -58,6 +58,7 @@ public class Main {
                             System.exit(0);
                         } else if (response.equals("stats")) {
                             statistics.ShowStatistics(computer);
+                            location = "Home";
                         } else {
                             throw new MultimediaException("Wrong answer! Try again.");
                         }
