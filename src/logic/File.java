@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 
 public class File implements Serializable {
 
+    private static final long serialVersionUID = 2382365464151690333L;
+
     String name;
     String type;
     double dimension;
@@ -15,6 +17,13 @@ public class File implements Serializable {
         this.type = type;
         this.dimension = dimension;
         this.date = date;
+    }
+
+    public File(String name, String type, double dimension) {
+        this.name = name;
+        this.type = type;
+        this.dimension = dimension;
+        this.date = LocalDateTime.now();
     }
 
     public String getName() {

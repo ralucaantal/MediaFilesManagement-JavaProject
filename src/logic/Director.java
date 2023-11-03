@@ -1,6 +1,7 @@
 package logic;
 
-import java.io.*;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +14,15 @@ public class Director implements Serializable {
 
     List<File> files = new ArrayList<>();
 
+
     public Director(String path, List<File> files) {
         this.path = path;
         this.files = files;
+    }
+
+    public Director(String path) {
+        this.path = path;
+        this.files = new ArrayList<>();
     }
 
     public String getPath() {

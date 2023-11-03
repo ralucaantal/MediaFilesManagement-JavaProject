@@ -39,7 +39,7 @@ public class Main {
                     response = scanner.nextLine();
                     try {
                         if (response.equals("continue")) {
-                            System.out.println("Here are your directories: Choose one: ");
+                            System.out.println("Here are your directories: Choose one to navigate inside it: ");
                             for (int i = 0; i < computer.getDirectories().size(); i++) {
                                 System.out.println((i + 1) + ". " + computer.getDirectories().get(i).getPath());
                             }
@@ -59,18 +59,32 @@ public class Main {
                     break;
                 case "Directories":
                     try {
-                        if (!computer.getDirectories().isEmpty()) {
+                        System.out.println("Or choose an action: add | rename | delete");
 
+                        response = scanner.nextLine();
+
+                        if (response.equals("exit")) {
+                            computer.writeDirectories(computer.getDirectories());
+
+                            System.exit(0);
+                        } else if (response.equals("back")) {
+                            location = "Home";
+                        }
+                        // DE FACUT O PAGINA NOUA IN MENIU
+                        else if(response.equals("add"))
+                        {
+                            System.out.println("Type the path of the new director: ");
 
                             response = scanner.nextLine();
 
-                            if (response.equals("exit")) {
-                                computer.writeDirectories(computer.getDirectories());
+                            Director newDirector=new Director(response);
 
-                                System.exit(0);
-                            } else if (response.equals("back")) {
-                                location = "Home";
-                            } else if (Double.parseDouble(response) >= 1 && Double.parseDouble(response) <= computer.getDirectories().size()) {
+                            computer.getDirectories().add(newDirector);
+                        }
+
+                       else  if (!computer.getDirectories().isEmpty()) {
+
+                          if (Double.parseDouble(response) >= 1 && Double.parseDouble(response) <= computer.getDirectories().size()) {
                                 int resp = (int) Double.parseDouble(response) - 1;
                                 directorNo = resp;
                                 System.out.println("-------------------------------------");
@@ -78,7 +92,7 @@ public class Main {
 
 
                                 for (int i = 0; i < computer.getDirectories().get(resp).getFiles().size(); i++) {
-                                    System.out.println(i + 1 + ". " + computer.getDirectories().get(resp).getFiles().get(i));
+                                    System.out.println(i + 1 + ". " + computer.getDirectories().get(resp).getFiles().get(i).getName());
                                 }
 
                                 System.out.println("-------------------------------------");
@@ -113,11 +127,11 @@ public class Main {
                             int index = (int) (Double.parseDouble(response) - 1);
                             System.out.println(computer.getDirectories().get(directorNo).getFiles().get(index));
 
-                            System.out.println(" Write `back` to go back. Write `exit` to close the app. ");
+                            System.out.println("Write `back` to go back. Write `exit` to close the app. ");
                             response = scanner.nextLine();
                             if (response.equals("back")) {
                                 for (int i = 0; i < computer.getDirectories().get(directorNo).getFiles().size(); i++) {
-                                    System.out.println(i + 1 + ". " + computer.getDirectories().get(directorNo).getFiles().get(i));
+                                    System.out.println(i + 1 + ". " + computer.getDirectories().get(directorNo).getFiles().get(i).getName());
                                 }
                                 location = "Files";
                             } else if (response.equals("exit")) {
